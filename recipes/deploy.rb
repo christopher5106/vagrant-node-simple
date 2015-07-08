@@ -1,0 +1,37 @@
+include_recipe 'apt'
+
+directory "/tmp/private_code/.ssh" do
+  owner 'www-data'
+  recursive true
+end
+
+bash "create wrap ssh for git" do
+  user "root"
+  cwd "/"
+  code <<-EOH
+   echo '#!/usr/bin/env bash' > /tmp/private_code/wrap-ssh4git.sh
+   echo '/usr/bin/env ssh -o "StrictHostKeyChecking=no" -i "/home/ubuntu/certificates/id_deploy" $1 $2' >> /tmp/private_code/wrap-ssh4git.sh
+   chown www-data:www-data /tmp/private_code/wrap-ssh4git.sh
+   chmod +x /tmp/private_code/wrap-ssh4git.sh
+  EOH
+end
+
+directory "/srv/www/#{node[:nodejs][:name]}" do
+  owner 'www-data'
+  recursive true
+end
+
+deploy "/srv/www/nodejs_backend" do
+  repo node[:nodejs][:repo]
+  revision node[:nodejs][:revision]
+  user "www-data"
+  enable_submodules true
+  symlink_before_migrate.clear
+  create_dirs_before_symlink.clear
+  purge_before_symlink.clear
+  symlinks.clear
+  keep_releases 10
+  action :deploy # or :rollback
+  git_ssh_wrapper "/tmp/private_code/wrap-ssh4git.sh"
+  scm_provider Chef::Provider::Git # is the default, for svn: Chef::Provider::Subversion
+end
