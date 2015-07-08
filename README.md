@@ -1,8 +1,8 @@
 # Simple Chef Cookbook for NodeJS on Ubuntu 14.04 for Vagrant [complementary to OpsWorks NodeJS cookbook]
 
-This recipe enables deploy of a NodeJS app on your Vagrant. This is complementary to [Opsworks NodeJS cookebook](https://github.com/aws/opsworks-cookbooks/tree/release-chef-11.10/opsworks_nodejs).
+This recipe enables deploy of a NodeJS app in your Vagrant box. This is complementary to [Opsworks NodeJS cookebook](https://github.com/aws/opsworks-cookbooks/tree/release-chef-11.10/opsworks_nodejs) (same parametrization.)
 
-Usage : create your git repository with a Berksfile, a environments directory, and a Vagrantfile.
+Usage : create your git repository with a `Berksfile`, a `Vagrantfile` and `environments` and `roles` directories.
 
 In the Berksfile
 
