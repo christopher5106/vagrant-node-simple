@@ -1,6 +1,6 @@
-# Simple Chef Cookbook for NodeJS on Ubuntu 14.04
+# Simple Chef Cookbook for NodeJS on Ubuntu 14.04 [complementary to Opworks NodeJS]
 
-This recipe enables deploy of a NodeJS app on Opsworks and Vagrant.
+This recipe enables deploy of a NodeJS app on your Vagrant. This is complementary to [Opsworks NodeJS cookebook](https://github.com/aws/opsworks-cookbooks/tree/release-chef-11.10/opsworks_nodejs).
 
 Usage : create your git repository with a Berksfile, a environments directory, and a Vagrantfile.
 
@@ -8,7 +8,7 @@ In the Berksfile
 
     cookbook 'git'
     cookbook 'apt', git: 'git://github.com/opscode-cookbooks/apt.git'
-    cookbook 'mysql-simple', git: 'git://github.com/christopher5106/node-simple.git'
+    cookbook 'vagrant-node-simple', git: 'git://github.com/christopher5106/node-simple.git'
 
 In environments/development.rb :
 
@@ -23,14 +23,14 @@ In environments/development.rb :
     "override_attributes":
     {
       "environment":"development",
-      "node_app":{
+      "node":{
         "name":"XXXXXXXXXXXXXX"
       }
     }
   }
 ```
 
-where `name` is the name of your app.
+where `name` is the name of your nodejs app (the same as in your Opsworks Apps).
 
 In the Vagrantfile
 
@@ -51,19 +51,13 @@ In the Vagrantfile
 Launch your instance with `vagrant up` command.
 
 In Opsworks,
-- create a stack with your git repository, berkshelf enabled, and the json :
 
-```json
-{
-  "node_app":{
-    "name":"XXXXXXXXXXXXXX"
-  }
-}
-```
+- create a stack with your git repository, berkshelf enabled,
 
-- create a layer and add the recipe "node-simple" to a layer
+- create a NodeJS layer (you can also create a custom layer and add the recipe "opsworks_nodejs" to the setup step, the recipe "opsworks_nodejs::configure" to the configure step, and the recipe to "deploy::nodejs" to the deploy step)
 
 - create an app with name equals to the name of the app in the JSON.
 
+Launch your instance in Opsworks. Opsworks will deploy the code corresponding to the Branch/Revision specified in the app configuration, to the HEAD if not specified.
 
-Launch you instance in Opsworks.
+You can configure a hook in Github so that committed code will [automatically deployed in Opsworks](http://bytes.babbel.com/en/articles/2014-01-22-github-service-hook-for-aws-ops-works.html).

@@ -1,18 +1,17 @@
 include_recipe 'apt'
 
-
 rev = node.kernix[:revision]
 
 if !node[:opsworks].nil? && node[:opsworks][:instance][:infrastructure_class] == 'ec2'
-  kernix_deploy = false
+  myapp_deploy = false
   node[:deploy].each do |application, deploy|
-    if deploy[:application] != 'kernix'
-      Chef::Log.debug("Skipping kernix::deploy for application #{application} as it is not the kernix app")
+    if deploy[:application] != node[:node][:name]
+      Chef::Log.debug("Skipping kernix::deploy for application #{application} as it is not your app")
       next
     else
       Chef::Log.debug("Deploying #{application}")
-      kernix_deploy = true
-      rev = node.deploy.kernix.scm.revision
+      myapp_deploy = true
+      rev = node.deploy.myapp.scm.revision
       if rev.nil?
         rev = "master"
       end
@@ -29,7 +28,7 @@ if !node[:opsworks].nil? && node[:opsworks][:instance][:infrastructure_class] ==
     #   app :kernix
     # end
   end
-  return if kernix_deploy == false
+  return if myapp_deploy == false
 end
 
 directory "/tmp/private_code/.ssh" do
