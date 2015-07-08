@@ -1,13 +1,16 @@
 # Simple Chef Cookbook for NodeJS on Ubuntu 14.04
-Usage :
 
-In my Berksfile
+This recipe enables deploy of a NodeJS app on Opsworks and Vagrant.
+
+Usage : create your git repository with a Berksfile, a environments directory, and a Vagrantfile.
+
+In the Berksfile
 
     cookbook 'git'
     cookbook 'apt', git: 'git://github.com/opscode-cookbooks/apt.git'
     cookbook 'mysql-simple', git: 'git://github.com/christopher5106/node-simple.git'
 
-In environments/development.rb or in my OpsWorks Stack configuration :
+In environments/development.rb :
 
 ```json
   {
@@ -21,15 +24,15 @@ In environments/development.rb or in my OpsWorks Stack configuration :
     {
       "environment":"development",
       "node_app":{
-        "path":"XXXXXXXXXXXXXX"
+        "name":"XXXXXXXXXXXXXX"
       }
     }
   }
 ```
 
-where `path` is the path to the app.
+where `name` is the name of your app.
 
-In my Vagrantfile
+In the Vagrantfile
 
     VAGRANTFILE_API_VERSION = "2"
 
@@ -45,4 +48,22 @@ In my Vagrantfile
       end
     end
 
-In Opsworks, add the recipe "node-simple" to a layer.
+Launch your instance with `vagrant up` command.
+
+In Opsworks,
+- create a stack with your git repository, berkshelf enabled, and the json :
+
+```json
+{
+  "node_app":{
+    "name":"XXXXXXXXXXXXXX"
+  }
+}
+```
+
+- create a layer and add the recipe "node-simple" to a layer
+
+- create an app with name equals to the name of the app in the JSON.
+
+
+Launch you instance in Opsworks.
