@@ -20,14 +20,14 @@ In environments/development.rb or in my OpsWorks Stack configuration :
     "override_attributes":
     {
       "environment":"development",
-      "mysql":{
-        "server_root_password":"XXXXXXXXXXXXXX",
-        "datadir":"/var/lib/mysql",
-        "logdir":"/var/log/mysql"
+      "node_app":{
+        "path":"XXXXXXXXXXXXXX"
       }
     }
   }
 ```
+
+where `path` is the path to the app.
 
 In my Vagrantfile
 
@@ -36,12 +36,13 @@ In my Vagrantfile
     Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.box = "ubuntu/trusty64"
       config.vm.network "forwarded_port", guest: 3000, host: 3000
-      config.vm.network "forwarded_port", guest: 9200, host: 9200
       config.berkshelf.enabled = true;
       config.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = "./"
-        chef.add_recipe "mysql-simple"
+        chef.add_recipe "node-simple"
         chef.environments_path = "environments"
         chef.environment = "development"
       end
     end
+
+In Opsworks, add the recipe "node-simple" to a layer.
