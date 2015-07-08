@@ -6,6 +6,7 @@ Usage : create your git repository with a `Berksfile`, a `Vagrantfile` and `envi
 
 In the Berksfile
 
+    cookbook 'ark'
     cookbook 'git'
     cookbook 'apt', git: 'git://github.com/opscode-cookbooks/apt.git'
     cookbook 'vagrant-node-simple', git: 'git://github.com/christopher5106/node-simple.git'
