@@ -68,7 +68,7 @@ In Opsworks,
 
 - create a NodeJS layer (you can also create a custom layer and add the recipe "opsworks_nodejs" to the setup step, the recipe "opsworks_nodejs::configure" to the configure step, and the recipe to "deploy::nodejs" to the deploy step).
 
-- create an app with name equals to the name of the app in the JSON, with your repository URL, your deploy key, and your revision/branch if needed.
+- create an app with the same parameters as in your JSON for Vagrant.
 
 Launch your instance in Opsworks. Opsworks will deploy the code corresponding to the Branch/Revision specified in the app configuration, to the HEAD if not specified.
 
