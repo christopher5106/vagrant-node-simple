@@ -24,13 +24,13 @@ In environments/development.rb :
     {
       "environment":"development",
       "node":{
-        "name":"XXXXXXXXXXXXXX"
+        "name":"YOUR_APP_NAME",
+        "repository":"git@bitbucket.org:YOUR_ORG/YOUR_REPO.git",
+        "revision":"HEAD"
       }
     }
   }
 ```
-
-where `name` is the name of your nodejs app (the same as in your Opsworks Apps).
 
 In the Vagrantfile
 
@@ -54,7 +54,7 @@ In Opsworks,
 
 - create a stack with your git repository, berkshelf enabled,
 
-- create a NodeJS layer (you can also create a custom layer and add the recipe "opsworks_nodejs" to the setup step, the recipe "opsworks_nodejs::configure" to the configure step, and the recipe to "deploy::nodejs" to the deploy step)
+- create a NodeJS layer (you can also create a custom layer and add the recipe "opsworks_nodejs" to the setup step, the recipe "opsworks_nodejs::configure" to the configure step, and the recipe to "deploy::nodejs" to the deploy step).
 
 - create an app with name equals to the name of the app in the JSON.
 
