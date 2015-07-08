@@ -48,7 +48,7 @@ In the Vagrantfile
     Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.box = "ubuntu/trusty64"
       config.vm.network "forwarded_port", guest: 3000, host: 3000
-      config.vm.synced_folder "../certificates", "/home/ubuntu/certificates", owner: "vagrant", group: "vagrant"
+      config.vm.synced_folder "../certs", "/home/ubuntu/certs", owner: "ubuntu", group: "ubuntu"
       config.berkshelf.enabled = true;
       config.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = "./"
@@ -59,7 +59,7 @@ In the Vagrantfile
       end
     end
 
-Create a directory `certificates` next to your chef deployement directory and add your deploy key `deploy.pem` for your git repository.
+Create a directory `cert` next to your chef deployement directory and add your deploy key `deploy.pem` for your node app repository in it (`../certs/deploy.pem`).
 
 Launch your instance with `vagrant up` command.
 
