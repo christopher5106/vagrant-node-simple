@@ -17,14 +17,14 @@ bash "create wrap ssh for git" do
 end
 
 directory "/srv/www/#{node[:nodejs][:name]}" do
-  owner 'ubuntu'
+  owner 'www-data'
   recursive true
 end
 
 deploy "/srv/www/#{{node[:nodejs][:name]}}" do
   repo node[:nodejs][:repo]
   revision node[:nodejs][:revision]
-  user "ubuntu"
+  user "www-data"
   enable_submodules true
   symlink_before_migrate.clear
   create_dirs_before_symlink.clear

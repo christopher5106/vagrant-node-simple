@@ -1,5 +1,5 @@
 bash "npm packages install" do
-  user "vagrant"
+  user "www-data"
   cwd "/srv/www/nodejs_backend/current"
   code <<-EOH
   npm install
@@ -8,7 +8,7 @@ end
 
 
 bash "npm start" do
-  user "vagrant"
+  user "www-data"
   cwd "/srv/www/nodejs_backend/current"
   code <<-EOH
   npm start
