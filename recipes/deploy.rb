@@ -24,7 +24,7 @@ end
 deploy "/srv/www/nodejs_backend" do
   repo node[:nodejs][:repo]
   revision node[:nodejs][:revision]
-  user "www-data"
+  user "vagrant"
   enable_submodules true
   symlink_before_migrate.clear
   create_dirs_before_symlink.clear
