@@ -78,4 +78,4 @@ Launch your instance in Opsworks. Opsworks will deploy the code corresponding to
 
 You can configure a hook in Github so that committed code will be [automatically deployed in Opsworks](http://bytes.babbel.com/en/articles/2014-01-22-github-service-hook-for-aws-ops-works.html).
 
-Note : for your NodeJS app to work with Opsworks cookbook, you need a server.js file in the root of your YOUR_NODE_APP_REPO. [Link](http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-node.html)
+Note : for your NodeJS app to work with Opsworks cookbook, you need a server.js file at the root of your YOUR_NODE_APP_REPO. [Link](http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-node.html)
