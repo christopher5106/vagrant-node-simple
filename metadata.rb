@@ -1,5 +1,5 @@
 name "vagrant-node-simple"
-version "0.1.1"
+version "0.1.2"
 description "A simple cookbook to deploy your NodeJS app on Vagrant Ubuntu"
 
 depends 'apt'

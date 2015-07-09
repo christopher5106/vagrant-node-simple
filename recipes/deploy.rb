@@ -10,7 +10,7 @@ bash "create wrap ssh for git" do
   cwd "/"
   code <<-EOH
    echo '#!/usr/bin/env bash' > /tmp/private_code/wrap-ssh4git.sh
-   echo '/usr/bin/env ssh -o "StrictHostKeyChecking=no" -i "/vagrant/deploy.pem" $1 $2' >> /tmp/private_code/wrap-ssh4git.sh
+   echo '/usr/bin/env ssh -o "StrictHostKeyChecking=no" -i "/var/www/.ssh/deploy.pem" $1 $2' >> /tmp/private_code/wrap-ssh4git.sh
    chown www-data:www-data /tmp/private_code/wrap-ssh4git.sh
    chmod +x /tmp/private_code/wrap-ssh4git.sh
   EOH
