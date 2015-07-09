@@ -1,7 +1,7 @@
 include_recipe 'apt'
 
 directory "/tmp/private_code/.ssh" do
-  owner 'www-data'
+  owner 'root'
   recursive true
 end
 
@@ -17,14 +17,14 @@ bash "create wrap ssh for git" do
 end
 
 directory "/srv/www/#{node[:nodejs][:name]}" do
-  owner 'www-data'
+  owner 'ubuntu'
   recursive true
 end
 
-deploy "/srv/www/nodejs_backend" do
+deploy "/srv/www/#{{node[:nodejs][:name]}}" do
   repo node[:nodejs][:repo]
   revision node[:nodejs][:revision]
-  user "vagrant"
+  user "ubuntu"
   enable_submodules true
   symlink_before_migrate.clear
   create_dirs_before_symlink.clear

@@ -60,7 +60,7 @@ run_list "recipe[git]","recipe[apt]","recipe[ark]","recipe[vagrant-node-simple::
       end
     end
 
-5. Add your deploy key `deploy.pem` for your node app repository in your repository (`./deploy.pem`).
+5. Add your node app repository deploy key `deploy.pem` to your repository and give it the right permissions (`chmod 600 ./deploy.pem`).
 
 6. Commit your Chef repository.
 

@@ -1,4 +1,4 @@
-bash "npm install" do
+bash "npm packages install" do
   user "vagrant"
   cwd "/srv/www/nodejs_backend/current"
   code <<-EOH
