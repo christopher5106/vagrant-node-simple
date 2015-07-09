@@ -9,31 +9,33 @@ Create your Chef repository with a `Berksfile`, a `Vagrantfile` and `environment
 
 1. In the Berksfile
 
-    cookbook 'ark'
-    cookbook 'git'
-    cookbook 'apt', git: 'git://github.com/opscode-cookbooks/apt.git'
-    cookbook 'vagrant-node-simple', git: 'git://github.com/christopher5106/vagrant-node-simple.git'
+```
+cookbook 'ark'
+cookbook 'git'
+cookbook 'apt', git: 'git://github.com/opscode-cookbooks/apt.git'
+cookbook 'vagrant-node-simple', git: 'git://github.com/christopher5106/vagrant-node-simple.git'
+```
 
 2. In environments/development.rb :
 
 ```json
+{
+  "name": "development",
+  "description": "The master development branch",
+  "cookbook_versions": {},
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {},
+  "override_attributes":
   {
-    "name": "development",
-    "description": "The master development branch",
-    "cookbook_versions": {},
-    "json_class": "Chef::Environment",
-    "chef_type": "environment",
-    "default_attributes": {},
-    "override_attributes":
-    {
-      "environment":"development",
-      "nodejs":{
-        "name":"YOUR_APP_NAME",
-        "repo":"git@bitbucket.org:YOUR_ORG/YOUR_NODE_APP_REPO.git",
-        "revision":"HEAD"
-      }
+    "environment":"development",
+    "nodejs":{
+      "name":"YOUR_APP_NAME",
+      "repo":"git@bitbucket.org:YOUR_ORG/YOUR_NODE_APP_REPO.git",
+      "revision":"HEAD"
     }
   }
+}
 ```
 
 3. In roles/nodejs_role.rb :
@@ -46,6 +48,7 @@ run_list "recipe[git]","recipe[apt]","recipe[ark]","recipe[vagrant-node-simple::
 
 4. In the Vagrantfile
 
+```ruby
     VAGRANTFILE_API_VERSION = "2"
 
     Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -60,6 +63,7 @@ run_list "recipe[git]","recipe[apt]","recipe[ark]","recipe[vagrant-node-simple::
         chef.add_role("nodejs_role")
       end
     end
+```
 
 5. Add your node app repository deploy key `deploy.pem` to your repository and give it the right permissions (`chmod 600 ./deploy.pem`).
 
