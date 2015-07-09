@@ -21,7 +21,7 @@ directory "/srv/www/#{node[:nodejs][:name]}" do
   recursive true
 end
 
-deploy "/srv/www/#{{node[:nodejs][:name]}}" do
+deploy "/srv/www/#{node[:nodejs][:name]}" do
   repo node[:nodejs][:repo]
   revision node[:nodejs][:revision]
   user "www-data"
