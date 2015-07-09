@@ -1,6 +1,6 @@
 # Simple Chef Cookbook for NodeJS on Ubuntu 14.04 for Vagrant [complementary to OpsWorks NodeJS cookbook]
 
-This recipe enables to deploy of a NodeJS app in your Vagrant box. It is complementary to [Opsworks NodeJS cookebook](https://github.com/aws/opsworks-cookbooks/tree/release-chef-11.10/opsworks_nodejs) :
+This recipe enables to deploy of a NodeJS app in your Vagrant box. It is complementary to [Opsworks NodeJS cookebook](https://github.com/aws/opsworks-cookbooks/tree/release-chef-11.10/opsworks_nodejs) for Opsworks deployment :
 recipes `vagrant-node-simple::deploy`,`vagrant-node-simple::install`,`vagrant-node-simple:start` are equivalent to `opsworks_nodejs:default`, `deploy:nodejs`, and parametrization of an Opsworks app is the same as the parametrization of the environment's JSON.
 
 ###Usage :
