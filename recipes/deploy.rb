@@ -1,5 +1,10 @@
 include_recipe 'apt'
 
+directory "/var/www/.ssh" do
+  owner 'www-data'
+  recursive true
+end
+
 directory "/tmp/private_code/.ssh" do
   owner 'www-data'
   recursive true
@@ -9,6 +14,8 @@ bash "create wrap ssh for git" do
   user "root"
   cwd "/"
   code <<-EOH
+   cp /vagrant/deploy.pem /var/www/.ssh/
+   chown www-data:www-data /var/www/.ssh/deploy.pem
    echo '#!/usr/bin/env bash' > /tmp/private_code/wrap-ssh4git.sh
    echo '/usr/bin/env ssh -o "StrictHostKeyChecking=no" -i "/var/www/.ssh/deploy.pem" $1 $2' >> /tmp/private_code/wrap-ssh4git.sh
    chown www-data:www-data /tmp/private_code/wrap-ssh4git.sh
