@@ -1,7 +1,7 @@
 include_recipe 'apt'
 
 directory "/tmp/private_code/.ssh" do
-  owner 'root'
+  owner 'www-data'
   recursive true
 end
 
