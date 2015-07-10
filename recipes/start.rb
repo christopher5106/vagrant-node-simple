@@ -1,16 +1,17 @@
 bash "npm packages install" do
-  user "www-data"
+  user "root"
   cwd "/srv/www/#{node[:nodejs][:name]}/current"
   code <<-EOH
+  npm install -g node-gyp
   npm install
   EOH
 end
 
 
 bash "npm start" do
-  user "www-data"
+  user "root"
   cwd "/srv/www/#{node[:nodejs][:name]}/current"
   code <<-EOH
-  npm start
+  node server.js
   EOH
 end
