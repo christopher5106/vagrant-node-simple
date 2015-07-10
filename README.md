@@ -3,6 +3,9 @@
 This recipe enables to deploy of a NodeJS app in your Vagrant box. It is complementary to [Opsworks NodeJS cookebook](https://github.com/aws/opsworks-cookbooks/tree/release-chef-11.10/opsworks_nodejs) for Opsworks deployment :
 recipes `vagrant-node-simple::deploy`,`vagrant-node-simple::install`,`vagrant-node-simple:start` are equivalent to `opsworks_nodejs:default`, `deploy:nodejs`, and parametrization of an Opsworks app is the same as the parametrization of the environment's JSON.
 
+As for OpsWorks, this cookbook require a `server.js` file at the root of your  YOUR_NODE_APP_REPO, with listening on port 80.
+[Link](http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-node.html)
+
 ###Usage :
 
 Create your Chef repository with a `Berksfile`, a `Vagrantfile` and `environments` and `roles` directories :
@@ -53,7 +56,7 @@ run_list "recipe[git]","recipe[apt]","recipe[ark]","recipe[vagrant-node-simple::
 
     Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.box = "ubuntu/trusty64"
-      config.vm.network "forwarded_port", guest: 3000, host: 3000
+      config.vm.network "forwarded_port", guest: 80, host: 3000
       config.berkshelf.enabled = true;
       config.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = "./"
@@ -82,5 +85,3 @@ In Opsworks,
 Launch your instance in Opsworks. Opsworks will deploy the code corresponding to the Branch/Revision specified in the app configuration, to the HEAD if not specified.
 
 You can configure a hook in Github so that committed code will be [automatically deployed in Opsworks](http://bytes.babbel.com/en/articles/2014-01-22-github-service-hook-for-aws-ops-works.html).
-
-Note : for your NodeJS app to work with Opsworks cookbook, you need a server.js file at the root of your YOUR_NODE_APP_REPO. [Link](http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-node.html)
