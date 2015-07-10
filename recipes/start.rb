@@ -12,6 +12,6 @@ bash "npm start" do
   user "root"
   cwd "/srv/www/#{node[:nodejs][:name]}/current"
   code <<-EOH
-  node server.js &
+  node server.js -p #{node[:nodejs][:port]} &
   EOH
 end
