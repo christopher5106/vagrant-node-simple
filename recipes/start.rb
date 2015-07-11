@@ -8,10 +8,9 @@ bash "npm packages install" do
 end
 
 
-bash "npm start" do
+execute "npm start" do
   user "root"
   cwd "/srv/www/#{node[:nodejs][:name]}/current"
-  code <<-EOH
-  PORT=#{node[:nodejs][:port]} node server.js &
-  EOH
+  command "PORT=#{node[:nodejs][:port]} node server.js &"
+  action :run
 end
