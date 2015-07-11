@@ -16,6 +16,7 @@ Create your Chef repository with a `Berksfile`, a `Vagrantfile` and `environment
 cookbook 'ark'
 cookbook 'git'
 cookbook 'apt', git: 'git://github.com/opscode-cookbooks/apt.git'
+cookbook 'swap-simple', git: 'git://github.com/christopher5106/swap-simple.git'
 cookbook 'vagrant-node-simple', git: 'git://github.com/christopher5106/vagrant-node-simple.git'
 ```
 
@@ -46,7 +47,7 @@ cookbook 'vagrant-node-simple', git: 'git://github.com/christopher5106/vagrant-n
 ```ruby
 name "my node app"
 description "The base role"
-run_list "recipe[git]","recipe[apt]","recipe[ark]","recipe[vagrant-node-simple::deploy]","recipe[vagrant-node-simple::install]","recipe[vagrant-node-simple:start]"
+run_list "recipe[git]","recipe[apt]","recipe[ark]","recipe[swap-simple]","recipe[vagrant-node-simple::deploy]","recipe[vagrant-node-simple::install]","recipe[vagrant-node-simple:start]"
 ```
 
 4. In the Vagrantfile
@@ -68,7 +69,7 @@ run_list "recipe[git]","recipe[apt]","recipe[ark]","recipe[vagrant-node-simple::
     end
 ```
 
-5. Add your node app repository deploy key `deploy.pem` to your repository and give it the right permissions (`chmod 600 ./deploy.pem`).
+5. Add your node app repository deploy key `deploy.pem`.
 
 6. Commit your Chef repository.
 
