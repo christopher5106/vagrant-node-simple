@@ -12,6 +12,6 @@ end
 execute "npm start" do
   user "root"
   cwd "/srv/www/#{node[:nodejs][:name]}/current"
-  command "PORT=#{node[:nodejs][:port]} pm2 server.js"
+  command "PORT=#{node[:nodejs][:port]} pm2 start server.js"
   action :run
 end
