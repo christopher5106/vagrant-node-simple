@@ -8,7 +8,6 @@ bash "npm packages install" do
   EOH
 end
 
-
 execute "npm start" do
   user "root"
   cwd "/srv/www/#{node[:nodejs][:name]}/current"
