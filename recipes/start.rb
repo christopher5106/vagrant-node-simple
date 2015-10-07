@@ -3,7 +3,7 @@ bash "npm packages install" do
   cwd "/srv/www/#{node[:nodejs][:name]}/current"
   code <<-EOH
   npm install -g node-gyp
-  npm install
+  npm install --unsafe-perm
   npm install pm2 -g
   EOH
 end
