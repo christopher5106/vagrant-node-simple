@@ -7,7 +7,7 @@ bash "npm packages install" do
   EOH
 end
 
-package 'nodejs'
-package 'npm'
-package 'build-essential'
-package 'nodejs-legacy'
+# package 'nodejs'
+# package 'npm'
+# package 'build-essential'
+# package 'nodejs-legacy'
